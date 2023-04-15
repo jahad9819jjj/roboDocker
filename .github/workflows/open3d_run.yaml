@@ -1,5 +1,5 @@
 # workflow name
-name:open3d_docker_build_actions
+name: open3d_docker_build_actions
 
 # trigger of workflow
 # [push] so that workflow is going to be executed if this repository is pushed.
