@@ -9,7 +9,8 @@ on: [push]
 # "runs-on" : the environment which job is executed.
 # "steps" : this job includes one step, "run" : command
 jobs:
-	check-bats-version:
-		runs-on: ubuntu-latest
-		steps:
-			- run: echo "Hello, CI/CD world"
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, CI/CD world"
+
