@@ -16,3 +16,49 @@ This repository focuses on addressing the barrier of environment setup that ofte
 - [ ] open3D + openCV(multi-stage build) 
 - [ ] openCV + torch(multi-stage build)
 - [ ] open3D + openCV + torch(multi-stage build)
+
+## Set proxy
+### `/etc/docker/daemon.json`
+```
+{
+    "proxies": {
+        "default": {
+            "httpProxy": "http://<プロキシサーバーのアドレス>:<ポート>",
+            "httpsProxy": "http://<プロキシサーバーのアドレス>:<ポート>",
+            "noProxy": "localhost,127.0.0.1"
+        }
+    }
+}
+```
+
+```
+sudo service docker restart
+OR
+sudo systemctl restart docker
+```
+
+### inside Dockerfile
+```
+ENV http_proxy http://<プロキシサーバーのアドレス>:<ポート>
+ENV https_proxy http://<プロキシサーバーのアドレス>:<ポート>
+ENV no_proxy localhost,127.0.0.1
+```
+
+### `docker run`
+```
+docker run -e http_proxy=http://<プロキシサーバーのアドレス>:<ポート> \
+           -e https_proxy=http://<プロキシサーバーのアドレス>:<ポート> \
+           -e no_proxy=localhost,127.0.0.1 \
+           <その他のオプション> <イメージ名>
+```
+
+### `docker-compose.yml`
+```
+services:
+  myservice:
+    image: myimage
+    environment:
+      - http_proxy=http://<プロキシサーバーのアドレス>:<ポート>
+      - https_proxy=http://<プロキシサーバーのアドレス>:<ポート>
+      - no_proxy=localhost,127.0.0.1
+```

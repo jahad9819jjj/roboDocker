@@ -1,5 +1,7 @@
 # Stage1 : build open3d
-FROM open3d-ci:openblas-arm64-py311-dev as builder
+ARG STAGE1_IMAGE=open3d-ci:openblas-arm64-py311-dev
+
+FROM ${STAGE1_IMAGE} as builder
 
 WORKDIR /Open3D/build
 
@@ -40,6 +42,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     gfortran \
     build-essential gdb \
+    libeigen3-dev \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
